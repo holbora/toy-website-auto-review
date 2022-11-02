@@ -1,7 +1,7 @@
 name: pr-closed
 concurrency: ${{ github.event.number }}
 
-on:
+on: 
   pull_request:
     types: [closed]
 
@@ -16,16 +16,16 @@ jobs:
   remove:
     runs-on: ubuntu-latest
     steps:
-    - uses: azure/login@v1
-      name: Sign in to Azure
-      with:
-        client-id: ${{ secrets.AZURE_CLIENT_ID }}
-        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-    - uses: Azure/cli@v1
-      name: Delete resource group
-      with:
-        inlineScript: |
-          az group delete \
-            --name ${{ env.resourceGroupName }}
-            --yes
+      - uses: azure/login@v1
+        name: Sign in to Azure
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      - uses: Azure/cli@v1
+        name: Delete resource group
+        with: 
+          inlineScript: |
+            az group delete \
+              --name ${{ env.resourceGroupName }} \
+              --yes
